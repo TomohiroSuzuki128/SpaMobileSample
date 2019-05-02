@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+    <EditText android:id="@+id/fromZipCodeTextEdit" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/hint_zipcode"/>
+    <Button android:id="@+id/fromZipCodeButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/from_zipcode" />
+    <EditText android:id="@+id/fromAddressTextEdit" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/hint_address"/>
+    <Button android:id="@+id/fromAddressButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/from_address" />
+
+    <ListView android:id="@+id/listView1" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" />
+</LinearLayout>

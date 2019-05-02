@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, Click Me!</string>
+    <string name="app_name">郵便番号検索</string>
+    <string name="from_zipcode">郵便番号から住所を検索</string>
+    <string name="from_address">住所から郵便番号を検索</string>
+    <string name="hint_zipcode">郵便番号を入力</string>
+    <string name="hint_address">住所を入力</string>
+</resources>
