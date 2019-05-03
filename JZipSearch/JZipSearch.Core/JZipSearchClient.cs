@@ -8,5 +8,6 @@ namespace JZipSearch.Core
     {
         public static async Task<Address[]> ZipToAddress(string zipCode) => await ZipSearchClient.ZipToAddress(zipCode);
         public static async Task<Address[]> AddressToZip(string pref, string address) => await ZipSearchClient.AddressToZip(pref, address);
+        public static async Task<Prefecture[]> Prefectures() => await ZipSearchClient.Prefectures();
     }
 }

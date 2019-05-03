@@ -11,6 +11,7 @@ namespace JZipCodeSearchClient
 {
     public static class ZipSearchClient
     {
+        internal static string _urlIndex { get; } = "https://www.post.japanpost.jp/zipcode/index.html";
         internal static string _urlBase { get; } = "https://www.post.japanpost.jp/cgi-zip/";
         internal static string _urlZipSearch { get; } = $"{_urlBase}zipcode.php";
         internal static string _urlAddressSearch { get; } = $"{_urlZipSearch}?zip={{0}}";
@@ -25,6 +26,7 @@ namespace JZipCodeSearchClient
         public static void Init(HttpClient httpClient) => _httpClient = httpClient;
         public static async Task<Address[]> ZipToAddress(string code) => await JZipCodeSearchClient.ZipToAddress.Search(code);
         public static async Task<Address[]> AddressToZip(string pref, string address) => await JZipCodeSearchClient.AddressToZip.Search(pref, address);
+        public static async Task<Prefecture[]> Prefectures() => await JZipCodeSearchClient.Prefectures.GetPrefectures();
     }
 
     internal static class ZipToAddress
@@ -207,5 +209,27 @@ namespace JZipCodeSearchClient
                             new Prefecture("47", "沖縄県"),
         };
         public static IEnumerable<Prefecture> All() => _all.ToArray();
+        public static async Task<Prefecture[]> GetPrefectures() {
+            var url = ZipSearchClient._urlIndex;
+            var html = await ZipSearchClient.HttpClient.GetStringAsync(url);
+            var prefHtml = GetPref(html);
+            var options = GetOptions(prefHtml);
+            var prefectures = options?.Select(option =>
+            {
+                var value = GetValue(option);
+                var name = GetName(option);
+                return new Prefecture(value, name);
+            }).ToArray();
+            return prefectures;
+        }
+
+        static Regex _regPref { get; } = new Regex("<select name=\"pref\"(.|\\n)*?</select>");
+        static Regex _regOption { get; } = new Regex("<option value=\".+?\">(.|\\n)+?</option>");
+        static Regex _regValue { get; } = new Regex("\".+?\"");
+        static Regex _regName { get; } = new Regex(">.+?<");
+        static string GetPref(string html) => _regPref.Match(html)?.Value;
+        static string[] GetOptions(string html) => _regOption.Matches(html)?.OfType<Match>().Select(m => m.Value).ToArray();
+        static string GetValue(string html) => _regValue.Match(html)?.Value.Replace("\"", "");
+        static string GetName(string html) => _regName.Match(html)?.Value.Replace(">", "").Replace("<", "");
     }
 }

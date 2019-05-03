@@ -3,9 +3,17 @@
     data:{
         zipCode: '',
         prefecture: '13',
+        prefectureList:[],
         address: '',
         addressList:[],
         isInAppBrowser:false
+        },
+    created: function(){
+        axios.get("./Api/Prefectures")
+            .then((response) => {
+                this.prefectureList = response.data;
+                this.prefecture = '13';
+            });
     },
     methods:{
         handleZipCodeToAddressClick: function(event){

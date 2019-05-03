@@ -8,6 +8,7 @@ using JZipCodeSearchClient;
 using Android.Views;
 using Android.Content;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace JZipSearch.Droid
 {
@@ -56,6 +57,19 @@ namespace JZipSearch.Droid
                 var intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(url));
                 StartActivity(intent);
             };
+
+            Task.Run(async () =>
+            {
+                try
+                {
+                    var prefectures = await JZipSearch.Core.JZipSearchClient.Prefectures();
+                    prefAddapter.Refresh(prefectures);
+                }
+                finally
+                {
+                    ;
+                }
+            });
         }
 
         class SpinnerAdapter : BaseAdapter<Prefecture>
@@ -84,7 +98,14 @@ namespace JZipSearch.Droid
 
                 return view;
             }
-       }
+
+            public void Refresh(Prefecture[] items)
+            {
+                _items.Clear();
+                _items.AddRange(items);
+                this.NotifyDataSetChanged();
+            }
+        }
 
         class CustomListAdapter : BaseAdapter<Address>
         {
