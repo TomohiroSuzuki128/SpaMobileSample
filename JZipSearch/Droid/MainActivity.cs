@@ -21,9 +21,14 @@ namespace JZipSearch.Droid
 
             var fromZipCodeTextEdit = FindViewById<EditText>(Resource.Id.fromZipCodeTextEdit);
             var fromZipCodeButton = FindViewById<Button>(Resource.Id.fromZipCodeButton);
+            var fromAddressSpinner = FindViewById<Spinner>(Resource.Id.fromAddressSpinner);
             var fromAddressTextEdit = FindViewById<EditText>(Resource.Id.fromAddressTextEdit);
             var fromAddressButton = FindViewById<Button>(Resource.Id.fromAddressButton);
             var listView = FindViewById<ListView>(Resource.Id.listView1);
+
+            var prefAddapter = new SpinnerAdapter(this, Prefectures.All().ToList());
+            fromAddressSpinner.Adapter = prefAddapter;
+            fromAddressSpinner.SetSelection(Prefectures.All().Select((pref, index) => new { Pref = pref, Index = index }).First(m => m.Pref.Name.Contains("東京")).Index);
 
             var listAdapter = new CustomListAdapter(this);
             listView.Adapter = listAdapter;
@@ -38,7 +43,8 @@ namespace JZipSearch.Droid
             fromAddressButton.Click += async (sender, e) =>
             {
                 var address = fromAddressTextEdit.Text;
-                var addressList = await JZipSearch.Core.JZipSearchClient.AddressToZip(address);
+                var pref = prefAddapter[fromAddressSpinner.SelectedItemPosition].Code;
+                var addressList = await JZipSearch.Core.JZipSearchClient.AddressToZip(pref, address);
                 listAdapter.Refresh(addressList);
             };
 
@@ -51,6 +57,34 @@ namespace JZipSearch.Droid
                 StartActivity(intent);
             };
         }
+
+        class SpinnerAdapter : BaseAdapter<Prefecture>
+        {
+            List<Prefecture> _items;
+            Activity _context;
+
+            public SpinnerAdapter(Activity context, List<Prefecture> items)
+            {
+                this._context = context;
+                this._items = items ?? new List<Prefecture>();
+            }
+            public SpinnerAdapter(Activity context) : this(context, null) {; }
+
+            public override Prefecture this[int position] => _items[position];
+            public override int Count => _items.Count;
+            public override long GetItemId(int position) => position;
+
+            public override View GetView(int position, View convertView, ViewGroup parent)
+            {
+                var item = _items[position];
+
+                var view = convertView;
+                if (view == null) view = _context.LayoutInflater.Inflate(Resource.Layout.list_item, null);
+                ((TextView)view).Text = item.Name;
+
+                return view;
+            }
+       }
 
         class CustomListAdapter : BaseAdapter<Address>
         {
