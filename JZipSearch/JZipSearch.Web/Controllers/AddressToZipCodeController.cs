@@ -14,8 +14,9 @@ namespace JZipSearch.Web.Controllers
         [HttpGet]
         public object Get()
         {
-            var query = HttpContext.Request.Query["q"];
-            var addressList = JZipSearch.Core.JZipSearchClient.AddressToZip(query).Result;
+            var queryPref = HttpContext.Request.Query["pref"];
+            var queryAddr = HttpContext.Request.Query["addr"];
+            var addressList = JZipSearch.Core.JZipSearchClient.AddressToZip(queryPref, queryAddr).Result;
             return addressList;
         }
     }
