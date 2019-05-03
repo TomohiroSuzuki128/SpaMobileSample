@@ -2,6 +2,7 @@
     el: '#app',
     data:{
         zipCode: '',
+        prefecture: '13',
         address: '',
         addressList:[],
         isInAppBrowser:false
@@ -22,7 +23,7 @@
         },
         handleAddressToZipCodeClick: function (event){
             this.addressList = [];
-            axios.get("./Api/AddressToZipCode?q="+this.address)
+            axios.get("./Api/AddressToZipCode?pref="+this.prefecture+"&addr="+this.address)
                 .then((response) => {
                     this.addressList = response.data;
                     for (let address of this.addressList) {
