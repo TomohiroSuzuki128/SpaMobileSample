@@ -8,6 +8,7 @@ using JZipCodeSearchClient;
 using Android.Views;
 using Android.Content;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace JZipSearch.Droid
 {
@@ -26,19 +27,24 @@ namespace JZipSearch.Droid
             var fromAddressButton = FindViewById<Button>(Resource.Id.fromAddressButton);
             var listView = FindViewById<ListView>(Resource.Id.listView1);
 
-            var prefAddapter = new SpinnerAdapter(this, Prefectures.All().ToList());
+            var prefAddapter = new SpinnerAdapter(this, JZipSearch.Core.JZipSearchClient.SavedPrefectures()?.ToList());
             fromAddressSpinner.Adapter = prefAddapter;
-            fromAddressSpinner.SetSelection(Prefectures.All().Select((pref, index) => new { Pref = pref, Index = index }).First(m => m.Pref.Name.Contains("東京")).Index);
+            SetTokyo();
 
             var listAdapter = new CustomListAdapter(this);
             listView.Adapter = listAdapter;
 
             fromZipCodeButton.Click += async (sender, e) =>
-                {
-                    var zipCode = fromZipCodeTextEdit.Text;
-                    var addressList = await JZipSearch.Core.JZipSearchClient.ZipToAddress(zipCode);
-                    listAdapter.Refresh(addressList);
-                };
+            {
+                var zipCode = fromZipCodeTextEdit.Text;
+                if (zipCode?.Any(c => !char.IsNumber(c)) == true){
+                    ShowToast("郵便番号は数字のみ入力してください.");
+                    return;
+                }
+                var addressList = await JZipSearch.Core.JZipSearchClient.ZipToAddress(zipCode);
+                listAdapter.Refresh(addressList);
+                if (addressList?.Any() == false) ShowNoItemToast();
+            };
 
             fromAddressButton.Click += async (sender, e) =>
             {
@@ -46,6 +52,7 @@ namespace JZipSearch.Droid
                 var pref = prefAddapter[fromAddressSpinner.SelectedItemPosition].Code;
                 var addressList = await JZipSearch.Core.JZipSearchClient.AddressToZip(pref, address);
                 listAdapter.Refresh(addressList);
+                if (addressList?.Any() == false) ShowNoItemToast();
             };
 
             listView.ItemClick += (sender, e) =>
@@ -56,6 +63,35 @@ namespace JZipSearch.Droid
                 var intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(url));
                 StartActivity(intent);
             };
+
+            Task.Run(async () =>
+            {
+                if (prefAddapter.Count > 0) return;
+                var isRefreshed = await JZipSearch.Core.JZipSearchClient.RefreshSavedPrefectures();
+                if (!isRefreshed) return;
+                var savedPrefectures = JZipSearch.Core.JZipSearchClient.SavedPrefectures();
+                this.RunOnUiThread(() =>
+                {
+                    ShowToast("都道府県リストが更新されました.");
+                    prefAddapter.Refresh(savedPrefectures);
+                    SetTokyo();
+                });
+            });
+        }
+
+        void ShowToast(string message)
+        {
+            var toast = Toast.MakeText(this, message, ToastLength.Long);
+            toast.SetGravity(GravityFlags.Center, 0, 0);
+            toast.Show();
+        }
+
+        void ShowNoItemToast() => ShowToast("該当する情報が見つかりません.");
+
+        void SetTokyo()
+        {
+            var fromAddressSpinner = FindViewById<Spinner>(Resource.Id.fromAddressSpinner);
+            fromAddressSpinner.SetSelection(Prefectures.All().Select((pref, index) => new { Pref = pref, Index = index }).First(m => m.Pref.Name.Contains("東京")).Index);
         }
 
         class SpinnerAdapter : BaseAdapter<Prefecture>
@@ -84,7 +120,14 @@ namespace JZipSearch.Droid
 
                 return view;
             }
-       }
+
+            public void Refresh(Prefecture[] items)
+            {
+                _items.Clear();
+                _items.AddRange(items);
+                this.NotifyDataSetChanged();
+            }
+        }
 
         class CustomListAdapter : BaseAdapter<Address>
         {
