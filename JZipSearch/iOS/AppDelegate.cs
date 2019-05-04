@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using JZipSearch.iOS.Views;
 using UIKit;
 
 namespace JZipSearch.iOS
@@ -18,10 +19,10 @@ namespace JZipSearch.iOS
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            Window = new UIWindow(UIScreen.MainScreen.Bounds);
-
-            var viewController = new MainViewController();
-            Window.RootViewController = viewController;
+            Window = new UIWindow(UIScreen.MainScreen.Bounds)
+            {
+                RootViewController = new MainViewController(),
+            };
             Window.MakeKeyAndVisible();
 
             return true;
