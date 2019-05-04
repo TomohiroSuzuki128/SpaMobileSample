@@ -8,23 +8,17 @@ namespace JZipSearch.iOS
     {
         CGPoint padding = new CGPoint(6.0, 0.0);
 
+        // 通常
         public override CGRect TextRect(CGRect forBounds)
-        {
-            // 通常
-            return forBounds.Inset(padding.X, padding.Y);
-        }
+            => forBounds.Inset(padding.X, padding.Y);
 
+        // 入力中
         public override CGRect EditingRect(CGRect forBounds)
-        {
-            // 入力中
-            return forBounds.Inset(padding.X, padding.Y);
-        }
+            => forBounds.Inset(padding.X, padding.Y);
 
+        // プレースホルダー
         public override CGRect PlaceholderRect(CGRect forBounds)
-        {
-            // プレースホルダー
-            return forBounds.Inset(padding.X, padding.Y);
-        }
+            => forBounds.Inset(padding.X, padding.Y);
 
     }
 }

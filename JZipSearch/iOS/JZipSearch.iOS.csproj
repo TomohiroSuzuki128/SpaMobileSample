@@ -88,6 +88,10 @@
       <Project>{0D0D9900-751B-4DF2-8D23-2EF5095A0ABB}</Project>
       <Name>JZipSearch.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JZipCodeSearchClient\JZipCodeSearchClient.csproj">
+      <Project>{9C59F96F-6222-4646-A996-89642F16D102}</Project>
+      <Name>JZipCodeSearchClient</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -111,8 +115,11 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Views\MainViewController.cs" />
     <Compile Include="Views\UIPaddingTextField.cs" />
+    <Compile Include="Views\MainViewController.cs" />
+    <Compile Include="Views\MainViewController.Designer.cs" />
+    <Compile Include="Views\PrefecturePickerViewDataSource.cs" />
+    <Compile Include="Views\PrefecturePickerViewDelegate.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
