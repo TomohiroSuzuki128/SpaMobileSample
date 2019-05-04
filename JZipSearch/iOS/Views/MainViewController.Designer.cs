@@ -63,6 +63,7 @@ namespace JZipSearch.iOS.Views
                 KeyboardType = UIKeyboardType.Twitter,
                 Font = UIFont.SystemFontOfSize(fontSize),
                 AccessibilityIdentifier = "zipcodeText",
+                Placeholder = "郵便番号を入力",
             };
 
             zipcodeText.Layer.BorderWidth = 1;
@@ -76,6 +77,31 @@ namespace JZipSearch.iOS.Views
             zipcodeText.TopAnchor.ConstraintEqualTo(zipcodeLabel.BottomAnchor, 5).Active = true;
             zipcodeText.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
             zipcodeText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
+
+
+            searchFromZipcodeButton = new UIButton(UIButtonType.RoundedRect)
+            {
+                Frame = new CGRect(0, 0, 375, 20),
+                Opaque = false,
+                ContentMode = UIViewContentMode.ScaleToFill,
+                HorizontalAlignment = UIControlContentHorizontalAlignment.Center,
+                VerticalAlignment = UIControlContentVerticalAlignment.Center,
+                LineBreakMode = UILineBreakMode.MiddleTruncation,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                Font = UIFont.SystemFontOfSize(fontSize),
+                AccessibilityIdentifier = "searchFromZipcodeButton",
+            };
+
+            searchFromZipcodeButton.SetTitle("郵便番号から住所を検索", UIControlState.Normal);
+            View.AddSubview(searchFromZipcodeButton);
+
+            searchFromZipcodeButton.HeightAnchor.ConstraintEqualTo(40f).Active = true;
+            searchFromZipcodeButton.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
+
+            searchFromZipcodeButton.TopAnchor.ConstraintEqualTo(zipcodeText.BottomAnchor, 15f).Active = true;
+            searchFromZipcodeButton.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
+            searchFromZipcodeButton.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
+
 
             prefectureLabel = new UILabel
             {
@@ -97,7 +123,7 @@ namespace JZipSearch.iOS.Views
             prefectureLabel.HeightAnchor.ConstraintEqualTo(20).Active = true;
             prefectureLabel.WidthAnchor.ConstraintEqualTo(100).Active = true;
 
-            prefectureLabel.TopAnchor.ConstraintEqualTo(zipcodeText.BottomAnchor, 15f).Active = true;
+            prefectureLabel.TopAnchor.ConstraintEqualTo(searchFromZipcodeButton.BottomAnchor, 25f).Active = true;
             prefectureLabel.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
 
             prefectureText = new UIPaddingTextField
@@ -120,9 +146,19 @@ namespace JZipSearch.iOS.Views
                 DataSource = new PrefecturePickerViewDataSource(),
                 ShowSelectionIndicator = true,
             };
+            prefecturePicker.Select(
+                nint.Parse(Prefectures.All().FirstOrDefault(x => x.Name == "東京都").Code) - 1,
+                0, false);
 
             // 決定バー
-            var toolbar = new UIToolbar(new CGRect(0, 0, View.Frame.Size.Width, 35));
+            var toolBar = new UIToolbar
+            {
+                BarStyle = UIBarStyle.Default,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+            };
+            toolBar.HeightAnchor.ConstraintEqualTo(40).Active = true;
+            toolBar.WidthAnchor.ConstraintEqualTo(View.Frame.Width).Active = true;
+
             var spacelItem = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, this, null);
             var doneItem = new UIBarButtonItem(UIBarButtonSystemItem.Done,
                 (s, e) =>
@@ -130,10 +166,10 @@ namespace JZipSearch.iOS.Views
                     prefectureText.EndEditing(true);
                     prefectureText.Text = Prefectures.All().Skip((int)prefecturePicker.SelectedRowInComponent(0)).FirstOrDefault().Name;
                 });
-            toolbar.SetItems(new UIBarButtonItem[] { spacelItem, doneItem }, true);
+            toolBar.SetItems(new UIBarButtonItem[] { spacelItem, doneItem }, true);
 
             prefectureText.InputView = prefecturePicker;
-            prefectureText.InputAccessoryView = toolbar;
+            prefectureText.InputAccessoryView = toolBar;
 
             View.AddSubview(prefectureText);
 
