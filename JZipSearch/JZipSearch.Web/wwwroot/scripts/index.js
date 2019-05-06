@@ -1,6 +1,7 @@
 ﻿var app = new Vue({
     el: '#app',
     data:{
+        initialized: false,
         zipCode: '',
         prefecture: '13',
         prefectureList:[],
@@ -14,6 +15,7 @@
                 this.prefectureList = response.data;
                 this.prefecture = '13';
             });
+        this.initialized = true;
     },
     methods:{
         handleZipCodeToAddressClick: function(event){
