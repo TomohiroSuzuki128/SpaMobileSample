@@ -42,11 +42,11 @@ namespace JZipSearch.iOS.Views
 
             zipcodeLabel = new UILabel
             {
-                Frame = new CGRect(0, 0, 375, 20),
+                Frame = new CGRect(0, 0, 100, 20),
                 Opaque = false,
                 UserInteractionEnabled = false,
                 ContentMode = UIViewContentMode.Left,
-                Text = "郵便番号を入力",
+                Text = "郵便番号",
                 TextAlignment = UITextAlignment.Left,
                 LineBreakMode = UILineBreakMode.TailTruncation,
                 Lines = 0,
@@ -58,11 +58,10 @@ namespace JZipSearch.iOS.Views
             View.AddSubview(zipcodeLabel);
 
             zipcodeLabel.HeightAnchor.ConstraintEqualTo(labelHeight).Active = true;
-            zipcodeLabel.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
+            zipcodeLabel.WidthAnchor.ConstraintEqualTo(labelWidth).Active = true;
 
             zipcodeLabel.TopAnchor.ConstraintEqualTo(View.TopAnchor, 100).Active = true;
             zipcodeLabel.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
-            zipcodeLabel.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 
             zipcodeText = new UIPaddingTextField
             {
@@ -81,10 +80,9 @@ namespace JZipSearch.iOS.Views
             View.AddSubview(zipcodeText);
 
             zipcodeText.HeightAnchor.ConstraintEqualTo(textFieldHeight).Active = true;
-            zipcodeText.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
+            zipcodeText.CenterYAnchor.ConstraintEqualTo(zipcodeLabel.CenterYAnchor).Active = true;
 
-            zipcodeText.TopAnchor.ConstraintEqualTo(zipcodeLabel.BottomAnchor, 5).Active = true;
-            zipcodeText.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
+            zipcodeText.LeftAnchor.ConstraintEqualTo(zipcodeLabel.RightAnchor, addressColumnSpace).Active = true;
             zipcodeText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 
 
