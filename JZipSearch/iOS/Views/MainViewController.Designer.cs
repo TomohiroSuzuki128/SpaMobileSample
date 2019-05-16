@@ -11,6 +11,14 @@ namespace JZipSearch.iOS.Views
     {
         static readonly nfloat fontSize = 20f;
 
+        static readonly nfloat labelHeight = 20f;
+        static readonly nfloat labelWidth = 100f;
+
+        static readonly nfloat textFieldHeight = 35f;
+
+        static readonly nfloat addressRowSpace = 30f;
+        static readonly nfloat addressColumnSpace = 20f;
+
         UILabel zipcodeLabel;
         UITextField zipcodeText;
         UIButton searchFromZipcodeButton;
@@ -19,8 +27,9 @@ namespace JZipSearch.iOS.Views
         UITextField prefectureText;
         UIPickerView prefecturePicker;
         UILabel cityLabel;
+        UITextField cityText;
         UILabel addressLabel;
-        UITextView addressText;
+        UITextField addressText;
 
         void InitializeUI()
         {
@@ -48,7 +57,7 @@ namespace JZipSearch.iOS.Views
             };
             View.AddSubview(zipcodeLabel);
 
-            zipcodeLabel.HeightAnchor.ConstraintEqualTo(20).Active = true;
+            zipcodeLabel.HeightAnchor.ConstraintEqualTo(labelHeight).Active = true;
             zipcodeLabel.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
 
             zipcodeLabel.TopAnchor.ConstraintEqualTo(View.TopAnchor, 100).Active = true;
@@ -71,7 +80,7 @@ namespace JZipSearch.iOS.Views
 
             View.AddSubview(zipcodeText);
 
-            zipcodeText.HeightAnchor.ConstraintEqualTo(35f).Active = true;
+            zipcodeText.HeightAnchor.ConstraintEqualTo(textFieldHeight).Active = true;
             zipcodeText.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
 
             zipcodeText.TopAnchor.ConstraintEqualTo(zipcodeLabel.BottomAnchor, 5).Active = true;
@@ -120,8 +129,8 @@ namespace JZipSearch.iOS.Views
             };
             View.AddSubview(prefectureLabel);
 
-            prefectureLabel.HeightAnchor.ConstraintEqualTo(20).Active = true;
-            prefectureLabel.WidthAnchor.ConstraintEqualTo(100).Active = true;
+            prefectureLabel.HeightAnchor.ConstraintEqualTo(labelHeight).Active = true;
+            prefectureLabel.WidthAnchor.ConstraintEqualTo(labelWidth).Active = true;
 
             prefectureLabel.TopAnchor.ConstraintEqualTo(searchFromZipcodeButton.BottomAnchor, 25f).Active = true;
             prefectureLabel.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
@@ -173,11 +182,102 @@ namespace JZipSearch.iOS.Views
 
             View.AddSubview(prefectureText);
 
-            prefectureText.HeightAnchor.ConstraintEqualTo(35f).Active = true;
+            prefectureText.HeightAnchor.ConstraintEqualTo(textFieldHeight).Active = true;
             prefectureText.CenterYAnchor.ConstraintEqualTo(prefectureLabel.CenterYAnchor).Active = true;
 
-            prefectureText.LeftAnchor.ConstraintEqualTo(prefectureLabel.RightAnchor, 20f).Active = true;
+            prefectureText.LeftAnchor.ConstraintEqualTo(prefectureLabel.RightAnchor, addressColumnSpace).Active = true;
             prefectureText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
+
+            cityLabel = new UILabel
+            {
+                Frame = new CGRect(0, 0, 100, 20),
+                Opaque = false,
+                UserInteractionEnabled = false,
+                ContentMode = UIViewContentMode.Left,
+                Text = "市区町村",
+                TextAlignment = UITextAlignment.Left,
+                LineBreakMode = UILineBreakMode.TailTruncation,
+                Lines = 0,
+                BaselineAdjustment = UIBaselineAdjustment.AlignBaselines,
+                AdjustsFontSizeToFitWidth = false,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                Font = UIFont.SystemFontOfSize(fontSize),
+            };
+            View.AddSubview(cityLabel);
+
+            cityLabel.HeightAnchor.ConstraintEqualTo(labelHeight).Active = true;
+            cityLabel.WidthAnchor.ConstraintEqualTo(labelWidth).Active = true;
+
+            cityLabel.TopAnchor.ConstraintEqualTo(prefectureLabel.BottomAnchor, addressRowSpace).Active = true;
+            cityLabel.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
+
+
+            cityText = new UIPaddingTextField
+            {
+                Frame = new CGRect(0, 0, 375, 35),
+                ContentMode = UIViewContentMode.ScaleToFill,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                KeyboardType = UIKeyboardType.Twitter,
+                Font = UIFont.SystemFontOfSize(fontSize),
+                AccessibilityIdentifier = "prefectureText",
+            };
+
+            cityText.Layer.BorderWidth = 1;
+            cityText.Layer.BorderColor = UIColor.LightGray.CGColor;
+
+            View.AddSubview(cityText);
+
+            cityText.HeightAnchor.ConstraintEqualTo(textFieldHeight).Active = true;
+            cityText.CenterYAnchor.ConstraintEqualTo(cityLabel.CenterYAnchor).Active = true;
+
+            cityText.LeftAnchor.ConstraintEqualTo(cityLabel.RightAnchor, addressColumnSpace).Active = true;
+            cityText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
+
+            addressLabel = new UILabel
+            {
+                Frame = new CGRect(0, 0, 100, 20),
+                Opaque = false,
+                UserInteractionEnabled = false,
+                ContentMode = UIViewContentMode.Left,
+                Text = "番地",
+                TextAlignment = UITextAlignment.Left,
+                LineBreakMode = UILineBreakMode.TailTruncation,
+                Lines = 0,
+                BaselineAdjustment = UIBaselineAdjustment.AlignBaselines,
+                AdjustsFontSizeToFitWidth = false,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                Font = UIFont.SystemFontOfSize(fontSize),
+            };
+            View.AddSubview(addressLabel);
+
+            addressLabel.HeightAnchor.ConstraintEqualTo(labelHeight).Active = true;
+            addressLabel.WidthAnchor.ConstraintEqualTo(labelWidth).Active = true;
+
+            addressLabel.TopAnchor.ConstraintEqualTo(cityLabel.BottomAnchor, addressRowSpace).Active = true;
+            addressLabel.LeftAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.LeftAnchor).Active = true;
+
+
+            addressText = new UIPaddingTextField
+            {
+                Frame = new CGRect(0, 0, 375, 35),
+                ContentMode = UIViewContentMode.ScaleToFill,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                KeyboardType = UIKeyboardType.Twitter,
+                Font = UIFont.SystemFontOfSize(fontSize),
+                AccessibilityIdentifier = "prefectureText",
+            };
+
+            addressText.Layer.BorderWidth = 1;
+            addressText.Layer.BorderColor = UIColor.LightGray.CGColor;
+
+            View.AddSubview(addressText);
+
+            addressText.HeightAnchor.ConstraintEqualTo(textFieldHeight).Active = true;
+            addressText.CenterYAnchor.ConstraintEqualTo(addressLabel.CenterYAnchor).Active = true;
+
+            addressText.LeftAnchor.ConstraintEqualTo(addressLabel.RightAnchor, addressColumnSpace).Active = true;
+            addressText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
+
 
         }
 

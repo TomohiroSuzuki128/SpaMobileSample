@@ -1,5 +1,6 @@
 ﻿using System;
 using CoreGraphics;
+using Foundation;
 using UIKit;
 
 namespace JZipSearch.iOS
@@ -19,6 +20,30 @@ namespace JZipSearch.iOS
         // プレースホルダー
         public override CGRect PlaceholderRect(CGRect forBounds)
             => forBounds.Inset(padding.X, padding.Y);
+
+        public UIPaddingTextField(CGRect frame) : base(frame)
+        {
+            Initialize();
+        }
+
+        public UIPaddingTextField(NSCoder coder) : base(coder)
+        {
+            Initialize();
+        }
+
+        public UIPaddingTextField()
+        {
+            Initialize();
+        }
+
+        void Initialize()
+        {
+            BorderStyle = UITextBorderStyle.None;
+            Layer.CornerRadius = 5;
+            Layer.BorderColor = UIColor.LightGray.CGColor;
+            Layer.BorderWidth = 1;
+            Layer.MasksToBounds = true;
+        }
 
     }
 }
