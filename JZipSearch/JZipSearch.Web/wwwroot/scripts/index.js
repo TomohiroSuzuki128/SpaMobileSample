@@ -3,50 +3,74 @@
     data:{
         initialized: false,
         zipCode: '',
-        prefecture: '13',
+        prefecture: '',
         prefectureList:[],
-        address: '',
-        addressList:[],
-        isInAppBrowser:false
+        address1: '',
+        address2: '',
+        message: '',
+        showMessage: false,
         },
     created: function(){
         axios.get("./Api/Prefectures")
             .then((response) => {
                 this.prefectureList = response.data;
-                this.prefecture = '13';
+                this.prefecture = '1';
             });
         this.initialized = true;
     },
     methods:{
         handleZipCodeToAddressClick: function(event){
-            this.addressList = [];
+            this.showMessage = false;
+            if (this.zipCode.match(/[^0-9]+/)) {
+                this.message = '郵便番号は数字のみ入力してください.'
+                this.showMessage = true;
+                return;
+            }
+            if (this.zipCode.length != 7) {
+                this.message = '郵便番号は7桁を入力してください.'
+                this.showMessage = true;
+                return;
+            }
             axios.get("./Api/ZipCodeToAddress?q="+this.zipCode)
                 .then((response) => {
-                    this.addressList = response.data;
-                    for (let address of this.addressList) {
-                        let addressText = address.prefecture + address.city + address.machi;
-                        let url = "https://www.bing.com/search?q="+addressText;
-                        address.url = url;
-                        address.target = (this.isInAppBrowser ? "_self" : "_blank");
+                    if(response.data.length === 0){
+                        this.message = '該当する情報が見つかりません.'
+                        this.showMessage = true;
+                        return;
                     }
+                    if(response.data.length > 1){
+                        this.message = '住所が特定できませんでした.'
+                        this.showMessage = true;
+                        return;
+                    }
+                    let address = response.data[0];
+                    this.prefecture = this.prefectureList.filter(pref => pref.name == address.prefecture)[0].code;
+                    this.address1 = address.city + address.machi;
+                    this.address2 = '';
                 });
         },
         handleAddressToZipCodeClick: function (event){
-            this.addressList = [];
-            axios.get("./Api/AddressToZipCode?pref="+this.prefecture+"&addr="+this.address)
+            this.showMessage = false;
+            if (this.prefecture.length === 0 || this.address1.length === 0) {
+                this.message = '都道府県と市区町村の両方を入力してください.'
+                this.showMessage = true;
+                return;
+            }
+            axios.get("./Api/AddressToZipCode?pref="+this.prefecture+"&addr="+this.address1)
                 .then((response) => {
-                    this.addressList = response.data;
-                    for (let address of this.addressList) {
-                        let addressText = address.prefecture + address.city + address.machi;
-                        let url = "https://www.bing.com/search?q="+addressText;
-                        address.url = url;
-                        address.target = (this.isInAppBrowser ? "_self" : "_blank");
+                    if(response.data.length === 0){
+                        this.message = '該当する情報が見つかりません.'
+                        this.showMessage = true;
+                        return;
                     }
+                    if(response.data.length > 1){
+                        this.message = '住所が特定できませんでした.'
+                        this.showMessage = true;
+                        return;
+                    }
+                    let address = response.data[0];
+                    this.zipCode = address.zipCode;
                 });
         }
     }
 });
-
-var topbox = document.getElementById('topbox');
-var listbox = document.getElementById('listbox');
-listbox.style.top = topbox.clientHeight + "px";

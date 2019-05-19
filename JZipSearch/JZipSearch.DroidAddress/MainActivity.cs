@@ -25,53 +25,38 @@ namespace JZipSearch.DroidAddress
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
 
-            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
-
             var fromAddressSpinner = FindViewById<Spinner>(Resource.Id.fromAddressSpinner);
             var fromAddressTextEdit = FindViewById<EditText>(Resource.Id.fromAddressTextEdit);
             var fromAddressButton = FindViewById<Button>(Resource.Id.fromAddressButton);
-            var listView = FindViewById<ListView>(Resource.Id.listView1);
+            var zipCodeTextEdit = FindViewById<EditText>(Resource.Id.zipCodeTextEdit);
 
-            var prefAddapter = new SpinnerAdapter(this, JZipSearch.Core.JZipSearchClient.SavedPrefectures()?.ToList());
+            var prefAddapter = new SpinnerAdapter(this, JZipCodeSearchClient.Prefectures.All()?.ToList());
             fromAddressSpinner.Adapter = prefAddapter;
-            SetTokyo();
-
-            var listAdapter = new CustomListAdapter(this);
-            listView.Adapter = listAdapter;
 
             fromAddressButton.Click += async (sender, e) =>
             {
-                var address = fromAddressTextEdit.Text;
+
                 var pref = prefAddapter[fromAddressSpinner.SelectedItemPosition].Code;
-                var addressList = await JZipSearch.Core.JZipSearchClient.AddressToZip(pref, address);
-                listAdapter.Refresh(addressList);
-                if (addressList?.Any() == false) ShowNoItemToast();
-            };
-
-            listView.ItemClick += (sender, e) =>
-            {
-                var address = listAdapter[e.Position];
-                var addresText = $"{address.Prefecture}{address.City}{address.Machi}";
-                var url = $"https://www.bing.com/search?q={WebUtility.UrlEncode(addresText)}";
-                var intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(url));
-                StartActivity(intent);
-            };
-
-            Task.Run(async () =>
-            {
-                if (prefAddapter.Count > 0) return;
-                var isRefreshed = await JZipSearch.Core.JZipSearchClient.RefreshSavedPrefectures();
-                if (!isRefreshed) return;
-                var savedPrefectures = JZipSearch.Core.JZipSearchClient.SavedPrefectures();
-                this.RunOnUiThread(() =>
+                var address = fromAddressTextEdit.Text;
+                if(string.IsNullOrWhiteSpace(pref) || string.IsNullOrWhiteSpace(address))
                 {
-                    ShowToast("都道府県リストが更新されました.");
-                    prefAddapter.Refresh(savedPrefectures);
-                    SetTokyo();
-                });
-            });
-
+                    ShowToast("都道府県と市区町村の両方を入力してください.");
+                    return;
+                }
+                var addressList = await JZipSearch.Core.JZipSearchClient.AddressToZip(pref, address);
+                if (addressList?.Any() == false)
+                {
+                    ShowNoItemToast();
+                    return;
+                }
+                if (addressList?.Count() > 1)
+                {
+                    ShowToast("郵便番号が特定できませんでした.");
+                    return;
+                }
+                var zip = addressList.FirstOrDefault();
+                zipCodeTextEdit.Text = zip.ZipCode;
+            };
         }
 
         void ShowToast(string message)
@@ -82,12 +67,6 @@ namespace JZipSearch.DroidAddress
         }
 
         void ShowNoItemToast() => ShowToast("該当する情報が見つかりません.");
-
-        void SetTokyo()
-        {
-            var fromAddressSpinner = FindViewById<Spinner>(Resource.Id.fromAddressSpinner);
-            fromAddressSpinner.SetSelection(Prefectures.All().Select((pref, index) => new { Pref = pref, Index = index }).First(m => m.Pref.Name.Contains("東京")).Index);
-        }
 
         class SpinnerAdapter : BaseAdapter<Prefecture>
         {
@@ -120,41 +99,6 @@ namespace JZipSearch.DroidAddress
             {
                 _items.Clear();
                 _items.AddRange(items);
-                this.NotifyDataSetChanged();
-            }
-        }
-
-        class CustomListAdapter : BaseAdapter<Address>
-        {
-            List<Address> _items;
-            Activity _context;
-
-            public CustomListAdapter(Activity context, List<Address> items)
-            {
-                this._context = context;
-                this._items = items ?? new List<Address>();
-            }
-            public CustomListAdapter(Activity context) : this(context, null) {; }
-
-            public override Address this[int position] => _items[position];
-            public override int Count => _items.Count;
-            public override long GetItemId(int position) => position;
-
-            public override View GetView(int position, View convertView, ViewGroup parent)
-            {
-                var item = _items[position];
-
-                var view = convertView;
-                if (view == null) view = _context.LayoutInflater.Inflate(Resource.Layout.list_item, null);
-                ((TextView)view).Text = item.ToString();
-
-                return view;
-            }
-
-            public void Refresh(Address[] addressList)
-            {
-                _items.Clear();
-                _items.AddRange(addressList);
                 this.NotifyDataSetChanged();
             }
         }

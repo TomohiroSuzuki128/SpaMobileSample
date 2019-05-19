@@ -10,19 +10,30 @@
     </head>
     <body style="margin-top:0px;">
         <div id="app">
-            <div style="position: absolute;" id="listbox">
-                <template v-if="initialized">
-                    <div v-for="item in addressList">
-                        <a v-bind:href="item.url" v-bind:target="item.target">
-                            {{ item.zipCode }} {{ item.prefecture }} {{ item.city }} {{ item.machi }} {{ item.kana }}
-                        </a>
-                    </div>
-                </template>
-            </div>
-            <div style="position: fixed; background-color: white; padding-bottom: 5px;" id="topbox">
-                <div>郵便番号検索</div>
-                <input type="text" v-model="zipCode" placeholder="郵便番号を入力" />
-                <button type="button" v-on:click="handleZipCodeToAddressClick">郵便番号から住所を検索</button>
+            <div style="float:left;">
+                <templete v-if="initialized">
+                    <transition name="fade">
+                        <div class="message" v-if="showMessage">{{ message }}</div>
+                    </transition>
+                </templete>
+                <div>
+                    <div class="element_name">都道府県</div>
+                    <select class="pref" v-model="prefecture">
+                        <option v-if="initialized"> </option>
+                        <option v-for="item in prefectureList" v-bind:value="item.code">{{ item.name }}</option>
+                    </select>
+                </div>
+                <div>
+                    <div class="element_name">市区町村</div>
+                    <input type="text" v-model="address1" placeholder="市区町村を入力" />
+                </div>
+                <div style="text-align: center;">
+                    <button type="button" v-on:click="handleAddressToZipCodeClick">住所から郵便番号を検索</button>
+                </div>
+                <div>
+                    <div class="element_name">郵便番号</div>
+                    <input type="text" v-model="zipCode" placeholder="郵便番号を入力" />
+                </div>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
