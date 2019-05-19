@@ -1,3 +1,32 @@
-﻿.pref {
-  width: 80px;
+﻿body {
+    margin: 0px;
+    padding: 10px;
+}
+
+.message {
+    border: solid 4px red;
+    padding: 4px 20px;
+    background-color: mistyrose;
+    color: red;
+}
+
+.pref {
+    width: 80px;
+}
+
+.element_name {
+    float:left;
+    width: 100px;
+}
+
+.fade-enter-active {
+    transition: opacity .5s;
+}
+
+.fade-leave-active {
+    transition: opacity .0s;
+}
+
+.fade-enter, .fade-leave-to {
+    opacity: 0;
 }

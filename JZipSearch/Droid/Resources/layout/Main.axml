@@ -10,7 +10,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
             android:text="@string/zipcode"
         />
         <EditText
@@ -32,7 +31,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
             android:text="@string/prefecture"
         />
 	    <Spinner
@@ -44,11 +42,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
             android:text="@string/address1"
         />
 	    <EditText
-		    android:id="@+id/fromAddressTextEdit"
+		    android:id="@+id/fromAddress1TextEdit"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:hint="@string/hint_address1"/>
@@ -57,10 +54,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
             android:text="@string/address2"
         />
 	    <EditText
+            android:id="@+id/fromAddress2TextEdit"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:hint="@string/hint_address2"/>

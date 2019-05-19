@@ -23,7 +23,8 @@ namespace JZipSearch.Droid
             var fromZipCodeTextEdit = FindViewById<EditText>(Resource.Id.fromZipCodeTextEdit);
             var fromZipCodeButton = FindViewById<Button>(Resource.Id.fromZipCodeButton);
             var fromAddressSpinner = FindViewById<Spinner>(Resource.Id.fromAddressSpinner);
-            var fromAddressTextEdit = FindViewById<EditText>(Resource.Id.fromAddressTextEdit);
+            var fromAddress1TextEdit = FindViewById<EditText>(Resource.Id.fromAddress1TextEdit);
+            var fromAddress2TextEdit = FindViewById<EditText>(Resource.Id.fromAddress2TextEdit);
 
             var prefAddapter = new SpinnerAdapter(this, JZipCodeSearchClient.Prefectures.All()?.ToList());
             fromAddressSpinner.Adapter = prefAddapter;
@@ -49,7 +50,8 @@ namespace JZipSearch.Droid
                 }
                 var address = addressList.FirstOrDefault();
                 fromAddressSpinner.SetSelection(Prefectures.All().Select((pref, index) => new { Pref = pref, Index = index }).First(m => m.Pref.Name.Contains(address.Prefecture)).Index);
-                fromAddressTextEdit.Text = $"{address.City}{address.Machi}";
+                fromAddress1TextEdit.Text = $"{address.City}{address.Machi}";
+                fromAddress2TextEdit.Text = "";
             };
         }
 

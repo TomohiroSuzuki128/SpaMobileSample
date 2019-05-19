@@ -463,20 +463,20 @@ namespace JZipSearch.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0a0026
-			public const int action_container = 2131361830;
-			
-			// aapt resource value: 0x7f0a0032
-			public const int action_divider = 2131361842;
-			
 			// aapt resource value: 0x7f0a0027
-			public const int action_image = 2131361831;
-			
-			// aapt resource value: 0x7f0a0028
-			public const int action_text = 2131361832;
+			public const int action_container = 2131361831;
 			
 			// aapt resource value: 0x7f0a0033
-			public const int actions = 2131361843;
+			public const int action_divider = 2131361843;
+			
+			// aapt resource value: 0x7f0a0028
+			public const int action_image = 2131361832;
+			
+			// aapt resource value: 0x7f0a0029
+			public const int action_text = 2131361833;
+			
+			// aapt resource value: 0x7f0a0034
+			public const int actions = 2131361844;
 			
 			// aapt resource value: 0x7f0a0017
 			public const int all = 2131361815;
@@ -514,8 +514,8 @@ namespace JZipSearch.Droid
 			// aapt resource value: 0x7f0a000b
 			public const int center_vertical = 2131361803;
 			
-			// aapt resource value: 0x7f0a0031
-			public const int chronometer = 2131361841;
+			// aapt resource value: 0x7f0a0032
+			public const int chronometer = 2131361842;
 			
 			// aapt resource value: 0x7f0a000c
 			public const int clip_horizontal = 2131361804;
@@ -538,11 +538,14 @@ namespace JZipSearch.Droid
 			// aapt resource value: 0x7f0a001a
 			public const int forever = 2131361818;
 			
+			// aapt resource value: 0x7f0a0025
+			public const int fromAddress1TextEdit = 2131361829;
+			
+			// aapt resource value: 0x7f0a0026
+			public const int fromAddress2TextEdit = 2131361830;
+			
 			// aapt resource value: 0x7f0a0024
 			public const int fromAddressSpinner = 2131361828;
-			
-			// aapt resource value: 0x7f0a0025
-			public const int fromAddressTextEdit = 2131361829;
 			
 			// aapt resource value: 0x7f0a0023
 			public const int fromZipCodeButton = 2131361827;
@@ -550,14 +553,14 @@ namespace JZipSearch.Droid
 			// aapt resource value: 0x7f0a0022
 			public const int fromZipCodeTextEdit = 2131361826;
 			
-			// aapt resource value: 0x7f0a002a
-			public const int icon = 2131361834;
+			// aapt resource value: 0x7f0a002b
+			public const int icon = 2131361835;
 			
-			// aapt resource value: 0x7f0a0034
-			public const int icon_group = 2131361844;
+			// aapt resource value: 0x7f0a0035
+			public const int icon_group = 2131361845;
 			
-			// aapt resource value: 0x7f0a002d
-			public const int info = 2131361837;
+			// aapt resource value: 0x7f0a002e
+			public const int info = 2131361838;
 			
 			// aapt resource value: 0x7f0a001b
 			public const int italic = 2131361819;
@@ -577,23 +580,23 @@ namespace JZipSearch.Droid
 			// aapt resource value: 0x7f0a001c
 			public const int normal = 2131361820;
 			
-			// aapt resource value: 0x7f0a002f
-			public const int notification_background = 2131361839;
+			// aapt resource value: 0x7f0a0030
+			public const int notification_background = 2131361840;
 			
-			// aapt resource value: 0x7f0a002b
-			public const int notification_main_column = 2131361835;
+			// aapt resource value: 0x7f0a002c
+			public const int notification_main_column = 2131361836;
 			
-			// aapt resource value: 0x7f0a0029
-			public const int notification_main_column_container = 2131361833;
+			// aapt resource value: 0x7f0a002a
+			public const int notification_main_column_container = 2131361834;
 			
 			// aapt resource value: 0x7f0a0013
 			public const int right = 2131361811;
 			
-			// aapt resource value: 0x7f0a002e
-			public const int right_icon = 2131361838;
+			// aapt resource value: 0x7f0a002f
+			public const int right_icon = 2131361839;
 			
-			// aapt resource value: 0x7f0a002c
-			public const int right_side = 2131361836;
+			// aapt resource value: 0x7f0a002d
+			public const int right_side = 2131361837;
 			
 			// aapt resource value: 0x7f0a0014
 			public const int start = 2131361812;
@@ -613,8 +616,8 @@ namespace JZipSearch.Droid
 			// aapt resource value: 0x7f0a0006
 			public const int text2 = 2131361798;
 			
-			// aapt resource value: 0x7f0a0030
-			public const int time = 2131361840;
+			// aapt resource value: 0x7f0a0031
+			public const int time = 2131361841;
 			
 			// aapt resource value: 0x7f0a0007
 			public const int title = 2131361799;
