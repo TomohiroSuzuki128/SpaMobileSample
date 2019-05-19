@@ -301,6 +301,9 @@ namespace JZipSearch.Droid
 			// aapt resource value: 0x7f060003
 			public const int browser_actions_title_color = 2131099651;
 			
+			// aapt resource value: 0x7f060008
+			public const int ic_launcher_background = 2131099656;
+			
 			// aapt resource value: 0x7f060004
 			public const int notification_action_color_filter = 2131099652;
 			
@@ -460,20 +463,20 @@ namespace JZipSearch.Droid
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f0a0026
+			public const int action_container = 2131361830;
+			
+			// aapt resource value: 0x7f0a0032
+			public const int action_divider = 2131361842;
+			
+			// aapt resource value: 0x7f0a0027
+			public const int action_image = 2131361831;
+			
 			// aapt resource value: 0x7f0a0028
-			public const int action_container = 2131361832;
+			public const int action_text = 2131361832;
 			
-			// aapt resource value: 0x7f0a0034
-			public const int action_divider = 2131361844;
-			
-			// aapt resource value: 0x7f0a0029
-			public const int action_image = 2131361833;
-			
-			// aapt resource value: 0x7f0a002a
-			public const int action_text = 2131361834;
-			
-			// aapt resource value: 0x7f0a0035
-			public const int actions = 2131361845;
+			// aapt resource value: 0x7f0a0033
+			public const int actions = 2131361843;
 			
 			// aapt resource value: 0x7f0a0017
 			public const int all = 2131361815;
@@ -511,8 +514,8 @@ namespace JZipSearch.Droid
 			// aapt resource value: 0x7f0a000b
 			public const int center_vertical = 2131361803;
 			
-			// aapt resource value: 0x7f0a0033
-			public const int chronometer = 2131361843;
+			// aapt resource value: 0x7f0a0031
+			public const int chronometer = 2131361841;
 			
 			// aapt resource value: 0x7f0a000c
 			public const int clip_horizontal = 2131361804;
@@ -535,9 +538,6 @@ namespace JZipSearch.Droid
 			// aapt resource value: 0x7f0a001a
 			public const int forever = 2131361818;
 			
-			// aapt resource value: 0x7f0a0026
-			public const int fromAddressButton = 2131361830;
-			
 			// aapt resource value: 0x7f0a0024
 			public const int fromAddressSpinner = 2131361828;
 			
@@ -550,14 +550,14 @@ namespace JZipSearch.Droid
 			// aapt resource value: 0x7f0a0022
 			public const int fromZipCodeTextEdit = 2131361826;
 			
-			// aapt resource value: 0x7f0a002c
-			public const int icon = 2131361836;
+			// aapt resource value: 0x7f0a002a
+			public const int icon = 2131361834;
 			
-			// aapt resource value: 0x7f0a0036
-			public const int icon_group = 2131361846;
+			// aapt resource value: 0x7f0a0034
+			public const int icon_group = 2131361844;
 			
-			// aapt resource value: 0x7f0a002f
-			public const int info = 2131361839;
+			// aapt resource value: 0x7f0a002d
+			public const int info = 2131361837;
 			
 			// aapt resource value: 0x7f0a001b
 			public const int italic = 2131361819;
@@ -571,32 +571,29 @@ namespace JZipSearch.Droid
 			// aapt resource value: 0x7f0a0001
 			public const int line3 = 2131361793;
 			
-			// aapt resource value: 0x7f0a0027
-			public const int listView1 = 2131361831;
-			
 			// aapt resource value: 0x7f0a0016
 			public const int none = 2131361814;
 			
 			// aapt resource value: 0x7f0a001c
 			public const int normal = 2131361820;
 			
-			// aapt resource value: 0x7f0a0031
-			public const int notification_background = 2131361841;
-			
-			// aapt resource value: 0x7f0a002d
-			public const int notification_main_column = 2131361837;
+			// aapt resource value: 0x7f0a002f
+			public const int notification_background = 2131361839;
 			
 			// aapt resource value: 0x7f0a002b
-			public const int notification_main_column_container = 2131361835;
+			public const int notification_main_column = 2131361835;
+			
+			// aapt resource value: 0x7f0a0029
+			public const int notification_main_column_container = 2131361833;
 			
 			// aapt resource value: 0x7f0a0013
 			public const int right = 2131361811;
 			
-			// aapt resource value: 0x7f0a0030
-			public const int right_icon = 2131361840;
-			
 			// aapt resource value: 0x7f0a002e
-			public const int right_side = 2131361838;
+			public const int right_icon = 2131361838;
+			
+			// aapt resource value: 0x7f0a002c
+			public const int right_side = 2131361836;
 			
 			// aapt resource value: 0x7f0a0014
 			public const int start = 2131361812;
@@ -616,8 +613,8 @@ namespace JZipSearch.Droid
 			// aapt resource value: 0x7f0a0006
 			public const int text2 = 2131361798;
 			
-			// aapt resource value: 0x7f0a0032
-			public const int time = 2131361842;
+			// aapt resource value: 0x7f0a0030
+			public const int time = 2131361840;
 			
 			// aapt resource value: 0x7f0a0007
 			public const int title = 2131361799;
@@ -698,7 +695,13 @@ namespace JZipSearch.Droid
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int Icon = 2130903040;
+			public const int ic_launcher = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int ic_launcher_foreground = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int ic_launcher_round = 2130903042;
 			
 			static Mipmap()
 			{
@@ -726,7 +729,10 @@ namespace JZipSearch.Droid
 			public const int hello = 2131296257;
 			
 			// aapt resource value: 0x7f090006
-			public const int hint_address = 2131296262;
+			public const int hint_address1 = 2131296262;
+			
+			// aapt resource value: 0x7f090007
+			public const int hint_address2 = 2131296263;
 			
 			// aapt resource value: 0x7f090005
 			public const int hint_zipcode = 2131296261;
