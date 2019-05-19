@@ -1,8 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
-    <EditText android:id="@+id/fromZipCodeTextEdit" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/hint_zipcode" android:inputType="number"/>
-    <Button android:id="@+id/fromZipCodeButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/from_zipcode" />
-    <Spinner android:id="@+id/fromAddressSpinner" android:layout_width="match_parent" android:layout_height="wrap_content" />
-    <EditText android:id="@+id/fromAddressTextEdit" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/hint_address1"/>
-    <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/hint_address2"/>
-</LinearLayout>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:theme="@android:style/Theme.Material.Light"
+    android:stretchColumns="1"
+    android:padding="10dp">
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="textEnd"
+            android:text="@string/zipcode"
+        />
+        <EditText
+		    android:id="@+id/fromZipCodeTextEdit"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:hint="@string/hint_zipcode"
+		    android:inputType="number"/>
+    </TableRow>
+    <TableRow>
+		<Button
+			android:id="@+id/fromZipCodeButton"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_span="2"
+			android:text="@string/from_zipcode"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="textEnd"
+            android:text="@string/prefecture"
+        />
+	    <Spinner
+		    android:id="@+id/fromAddressSpinner"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="textEnd"
+            android:text="@string/address1"
+        />
+	    <EditText
+		    android:id="@+id/fromAddressTextEdit"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:hint="@string/hint_address1"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="textEnd"
+            android:text="@string/address2"
+        />
+	    <EditText
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:hint="@string/hint_address2"/>
+    </TableRow>
+</TableLayout>

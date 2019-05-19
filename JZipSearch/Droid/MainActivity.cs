@@ -12,13 +12,12 @@ using System.Threading.Tasks;
 
 namespace JZipSearch.Droid
 {
-    [Activity(Label = "郵便番号検索", MainLauncher = true)]
+    [Activity(Label = "郵便番号検索", MainLauncher = true, Theme = "@android:style/Theme.Light.NoTitleBar")]
     public class MainActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            this.RequestWindowFeature(WindowFeatures.NoTitle);
             SetContentView(Resource.Layout.Main);
 
             var fromZipCodeTextEdit = FindViewById<EditText>(Resource.Id.fromZipCodeTextEdit);
@@ -26,9 +25,8 @@ namespace JZipSearch.Droid
             var fromAddressSpinner = FindViewById<Spinner>(Resource.Id.fromAddressSpinner);
             var fromAddressTextEdit = FindViewById<EditText>(Resource.Id.fromAddressTextEdit);
 
-            var prefAddapter = new SpinnerAdapter(this, JZipSearch.Core.JZipSearchClient.SavedPrefectures()?.ToList());
+            var prefAddapter = new SpinnerAdapter(this, JZipCodeSearchClient.Prefectures.All()?.ToList());
             fromAddressSpinner.Adapter = prefAddapter;
-            SetTokyo();
 
             fromZipCodeButton.Click += async (sender, e) =>
             {
@@ -44,25 +42,15 @@ namespace JZipSearch.Droid
                     return;
                 }
                 var addressList = await JZipSearch.Core.JZipSearchClient.ZipToAddress(zipCode);
-                if (addressList?.Any() == false) ShowNoItemToast();
+                if (addressList?.Any() == false)
+                {
+                    ShowNoItemToast();
+                    return;
+                }
                 var address = addressList.FirstOrDefault();
                 fromAddressSpinner.SetSelection(Prefectures.All().Select((pref, index) => new { Pref = pref, Index = index }).First(m => m.Pref.Name.Contains(address.Prefecture)).Index);
                 fromAddressTextEdit.Text = $"{address.City}{address.Machi}";
             };
-
-            Task.Run(async () =>
-            {
-                if (prefAddapter.Count > 0) return;
-                var isRefreshed = await JZipSearch.Core.JZipSearchClient.RefreshSavedPrefectures();
-                if (!isRefreshed) return;
-                var savedPrefectures = JZipSearch.Core.JZipSearchClient.SavedPrefectures();
-                this.RunOnUiThread(() =>
-                {
-                    ShowToast("都道府県リストが更新されました.");
-                    prefAddapter.Refresh(savedPrefectures);
-                    SetTokyo();
-                });
-            });
         }
 
         void ShowToast(string message)
@@ -73,12 +61,6 @@ namespace JZipSearch.Droid
         }
 
         void ShowNoItemToast() => ShowToast("該当する情報が見つかりません.");
-
-        void SetTokyo()
-        {
-            var fromAddressSpinner = FindViewById<Spinner>(Resource.Id.fromAddressSpinner);
-            fromAddressSpinner.SetSelection(Prefectures.All().Select((pref, index) => new { Pref = pref, Index = index }).First(m => m.Pref.Name.Contains("東京")).Index);
-        }
 
         class SpinnerAdapter : BaseAdapter<Prefecture>
         {

@@ -716,6 +716,12 @@ namespace JZipSearch.Droid
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f09000a
+			public const int address1 = 2131296266;
+			
+			// aapt resource value: 0x7f09000b
+			public const int address2 = 2131296267;
+			
 			// aapt resource value: 0x7f090002
 			public const int app_name = 2131296258;
 			
@@ -737,8 +743,14 @@ namespace JZipSearch.Droid
 			// aapt resource value: 0x7f090005
 			public const int hint_zipcode = 2131296261;
 			
+			// aapt resource value: 0x7f090009
+			public const int prefecture = 2131296265;
+			
 			// aapt resource value: 0x7f090000
 			public const int status_bar_notification_info_overflow = 2131296256;
+			
+			// aapt resource value: 0x7f090008
+			public const int zipcode = 2131296264;
 			
 			static String()
 			{
