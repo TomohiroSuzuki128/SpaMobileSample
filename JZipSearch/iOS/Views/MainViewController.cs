@@ -17,11 +17,10 @@ namespace JZipSearch.iOS.Views
             base.ViewDidLoad();
 
             InitializeUI();
-            searchFromZipcodeButton.AddTarget(this, new ObjCRuntime.Selector("ZipCodeEvent:"), UIControlEvent.TouchUpInside);
-            //searchFromZipcodeButton.AddTarget(this, new ObjCRuntime.Selector("NoResultEvent:"), UIControlEvent.TouchUpInside);
+            searchFromZipcodeButton.AddTarget(this, new ObjCRuntime.Selector("zipCodeEvent:"), UIControlEvent.TouchUpInside);
         }
 
-        [Export("ZipCodeEvent:")]
+        [Export("zipCodeEvent:")]
         async void ZipCodeEvent(NSObject sender)
         {
             var zipCode = zipcodeText.Text.Replace("-", "");
@@ -39,23 +38,18 @@ namespace JZipSearch.iOS.Views
             }
 
             var addressList = await JZipSearchClient.ZipToAddress(zipCode);
-            //listAdapter.Refresh(addressList);
 
             if (addressList?.Any() == false)
                 PresentAlert("該当する情報が見つかりません.");
-        }
 
-        //[Export("NoResultEvent:")]
-        //void NoResultEvent(NSObject sender)
-        //{
+            prefectureText.Text = addressList.FirstOrDefault().Prefecture;
+            cityText.Text = addressList.FirstOrDefault().City;
+            addressText.Text = addressList.FirstOrDefault().Machi;
 
-        //}
+            prefecturePicker.Select(
+            nint.Parse(Prefectures.All().FirstOrDefault(x => x.Name == addressList.FirstOrDefault().Prefecture).Code) - 1,
+            0, false);
 
-        void SetVirticalOffset(UITextView textView)
-        {
-            nfloat topOffset = (textView.Bounds.Size.Height - textView.ContentSize.Height * textView.ZoomScale) / 2.0f;
-            topOffset = topOffset < 0.0f ? 0.0f : topOffset;
-            textView.ContentOffset = new CGPoint(textView.ContentOffset.X, textView.ContentOffset.Y - topOffset);
         }
 
         void PresentAlert(string message)
