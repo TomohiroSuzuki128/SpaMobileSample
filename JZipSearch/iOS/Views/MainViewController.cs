@@ -4,6 +4,7 @@ using System.Linq;
 using CoreGraphics;
 using Foundation;
 using JZipCodeSearchClient;
+using JZipSearch.Core;
 using UIKit;
 
 namespace JZipSearch.iOS.Views
@@ -16,29 +17,39 @@ namespace JZipSearch.iOS.Views
             base.ViewDidLoad();
 
             InitializeUI();
-            searchFromZipcodeButton.AddTarget(this, new ObjCRuntime.Selector("ZipCodeEvent:"), UIControlEvent.TouchUpInside);
-            searchFromZipcodeButton.AddTarget(this, new ObjCRuntime.Selector("NoResultEvent:"), UIControlEvent.TouchUpInside);
+            searchFromZipcodeButton.AddTarget(this, new ObjCRuntime.Selector("zipCodeEvent:"), UIControlEvent.TouchUpInside);
         }
 
-        [Export("ZipCodeEvent:")]
-        void ZipCodeEvent(NSObject sender)
+        [Export("zipCodeEvent:")]
+        async void ZipCodeEvent(NSObject sender)
         {
-            var zipCode = zipcodeText.Text;
+            var zipCode = zipcodeText.Text.Replace("-", "");
+
+            if (string.IsNullOrWhiteSpace(zipCode))
+            {
+                PresentAlert("郵便番号を入力してください。");
+                return;
+            }
+
             if (zipCode?.Any(c => !char.IsNumber(c)) == true)
+            {
                 PresentAlert("郵便番号は数字のみ入力してください。");
-        }
+                return;
+            }
 
-        [Export("NoResultEvent:")]
-        void NoResultEvent(NSObject sender)
-        {
+            var addressList = await JZipSearchClient.ZipToAddress(zipCode);
 
-        }
+            if (addressList?.Any() == false)
+                PresentAlert("該当する情報が見つかりません.");
 
-        void SetVirticalOffset(UITextView textView)
-        {
-            nfloat topOffset = (textView.Bounds.Size.Height - textView.ContentSize.Height * textView.ZoomScale) / 2.0f;
-            topOffset = topOffset < 0.0f ? 0.0f : topOffset;
-            textView.ContentOffset = new CGPoint(textView.ContentOffset.X, textView.ContentOffset.Y - topOffset);
+            prefectureText.Text = addressList.FirstOrDefault().Prefecture;
+            cityText.Text = addressList.FirstOrDefault().City;
+            addressText.Text = addressList.FirstOrDefault().Machi;
+
+            prefecturePicker.Select(
+            nint.Parse(Prefectures.All().FirstOrDefault(x => x.Name == addressList.FirstOrDefault().Prefecture).Code) - 1,
+            0, false);
+
         }
 
         void PresentAlert(string message)
