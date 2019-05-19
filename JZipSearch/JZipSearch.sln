@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JZipSearch.DroidGawa", "JZi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JZipSearch.DroidAddress", "JZipSearch.DroidAddress\JZipSearch.DroidAddress.csproj", "{D2BFE9FC-1CB0-4992-91B6-2AE9C97C6558}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JZipSearch.iOSAddress", "JZipSearch.iOSAddress\JZipSearch.iOSAddress.csproj", "{C7A093CC-B69B-4C93-8054-5A2789ECAE45}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -110,6 +112,18 @@ Global
 		{D2BFE9FC-1CB0-4992-91B6-2AE9C97C6558}.Release|iPhone.Build.0 = Release|Any CPU
 		{D2BFE9FC-1CB0-4992-91B6-2AE9C97C6558}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{D2BFE9FC-1CB0-4992-91B6-2AE9C97C6558}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{C7A093CC-B69B-4C93-8054-5A2789ECAE45}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
+		{C7A093CC-B69B-4C93-8054-5A2789ECAE45}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
+		{C7A093CC-B69B-4C93-8054-5A2789ECAE45}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{C7A093CC-B69B-4C93-8054-5A2789ECAE45}.Debug|iPhone.Build.0 = Debug|iPhone
+		{C7A093CC-B69B-4C93-8054-5A2789ECAE45}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{C7A093CC-B69B-4C93-8054-5A2789ECAE45}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{C7A093CC-B69B-4C93-8054-5A2789ECAE45}.Release|Any CPU.ActiveCfg = Release|iPhone
+		{C7A093CC-B69B-4C93-8054-5A2789ECAE45}.Release|Any CPU.Build.0 = Release|iPhone
+		{C7A093CC-B69B-4C93-8054-5A2789ECAE45}.Release|iPhone.ActiveCfg = Release|iPhone
+		{C7A093CC-B69B-4C93-8054-5A2789ECAE45}.Release|iPhone.Build.0 = Release|iPhone
+		{C7A093CC-B69B-4C93-8054-5A2789ECAE45}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{C7A093CC-B69B-4C93-8054-5A2789ECAE45}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
