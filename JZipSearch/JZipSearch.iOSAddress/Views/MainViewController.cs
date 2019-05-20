@@ -7,7 +7,7 @@ using JZipCodeSearchClient;
 using JZipSearch.Core;
 using UIKit;
 
-namespace JZipSearch.iOS.Views
+namespace JZipSearch.iOSAddress.Views
 {
     public partial class MainViewController : UIViewController
     {
@@ -40,10 +40,7 @@ namespace JZipSearch.iOS.Views
             var addressList = await JZipSearchClient.ZipToAddress(zipCode);
 
             if (addressList?.Any() == false)
-            {
                 PresentAlert("該当する情報が見つかりません.");
-                return;
-            }
 
             prefectureText.Text = addressList.FirstOrDefault().Prefecture;
             cityText.Text = addressList.FirstOrDefault().City;

@@ -5,7 +5,7 @@ using CoreGraphics;
 using JZipCodeSearchClient;
 using UIKit;
 
-namespace JZipSearch.iOS.Views
+namespace JZipSearch.iOSAddress.Views
 {
     public partial class MainViewController
     {
@@ -141,7 +141,6 @@ namespace JZipSearch.iOS.Views
                 KeyboardType = UIKeyboardType.Twitter,
                 Font = UIFont.SystemFontOfSize(fontSize),
                 AccessibilityIdentifier = "prefectureText",
-                Placeholder = "都道府県を選択",
             };
 
             prefectureText.Layer.BorderWidth = 1;
@@ -218,8 +217,7 @@ namespace JZipSearch.iOS.Views
                 TranslatesAutoresizingMaskIntoConstraints = false,
                 KeyboardType = UIKeyboardType.Twitter,
                 Font = UIFont.SystemFontOfSize(fontSize),
-                AccessibilityIdentifier = "cityText",
-                Placeholder = "市区町村を入力",
+                AccessibilityIdentifier = "prefectureText",
             };
 
             cityText.Layer.BorderWidth = 1;
@@ -264,8 +262,7 @@ namespace JZipSearch.iOS.Views
                 TranslatesAutoresizingMaskIntoConstraints = false,
                 KeyboardType = UIKeyboardType.Twitter,
                 Font = UIFont.SystemFontOfSize(fontSize),
-                AccessibilityIdentifier = "addressText",
-                Placeholder = "番地を入力",
+                AccessibilityIdentifier = "prefectureText",
             };
 
             addressText.Layer.BorderWidth = 1;
