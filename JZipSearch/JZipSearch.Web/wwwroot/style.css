@@ -35,14 +35,14 @@ input[type="text"], input[type="tel"] {
 }
 
 #container {
-    max-width:320px;
+    max-width:330px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .message {
     border: solid 2px red;
-    padding: 4px 20px;
+    padding: 4px 15px;
     background-color: mistyrose;
     color: red;
 }

@@ -22,24 +22,24 @@
         handleZipCodeToAddressClick: function(event){
             this.showMessage = false;
             if (this.zipCode.match(/[^0-9]+/)) {
-                this.message = '郵便番号は数字のみ入力してください.'
+                this.message = '郵便番号は数字のみ入力してください。'
                 this.showMessage = true;
                 return;
             }
             if (this.zipCode.length != 7) {
-                this.message = '郵便番号は7桁を入力してください.'
+                this.message = '郵便番号は7桁を入力してください。'
                 this.showMessage = true;
                 return;
             }
             axios.get("./Api/ZipCodeToAddress?q="+this.zipCode)
                 .then((response) => {
                     if(response.data.length === 0){
-                        this.message = '該当する情報が見つかりません.'
+                        this.message = '該当する情報が見つかりません。'
                         this.showMessage = true;
                         return;
                     }
                     if(response.data.length > 1){
-                        this.message = '住所が特定できませんでした.'
+                        this.message = '住所が特定できませんでした。'
                         this.showMessage = true;
                         return;
                     }
@@ -52,19 +52,19 @@
         handleAddressToZipCodeClick: function (event){
             this.showMessage = false;
             if (this.prefecture.length === 0 || this.address1.length === 0) {
-                this.message = '都道府県と市区町村の両方を入力してください.'
+                this.message = '都道府県と市区町村の両方を入力してください。'
                 this.showMessage = true;
                 return;
             }
             axios.get("./Api/AddressToZipCode?pref="+this.prefecture+"&addr="+this.address1)
                 .then((response) => {
                     if(response.data.length === 0){
-                        this.message = '該当する情報が見つかりません.'
+                        this.message = '該当する情報が見つかりません。'
                         this.showMessage = true;
                         return;
                     }
                     if(response.data.length > 1){
-                        this.message = '住所が特定できませんでした.'
+                        this.message = '住所が特定できませんでした。'
                         this.showMessage = true;
                         return;
                     }
