@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace JZipSearch.Droid
 {
-    [Activity(Label = "郵便番号検索", MainLauncher = true, Theme = "@android:style/Theme.Light.NoTitleBar")]
+    [Activity(Label = "ネイティブ", MainLauncher = true, Theme = "@android:style/Theme.Light.NoTitleBar")]
     public class MainActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
