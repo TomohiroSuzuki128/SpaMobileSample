@@ -3,8 +3,44 @@
     padding: 10px;
 }
 
+div {
+    padding: 4px;
+}
+
+button {
+    font-size: 16px;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 4px;
+    font-size: 16px;
+}
+
+input[type="text"] {
+    padding: 5px 8px;
+    border-radius: 6px;
+    border-top: 1px solid #aaa;
+    border-left: 1px solid #aaa;
+    border-right: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    font-size: 16px;
+    width: auto;
+}
+
+#app {
+    overflow: auto;
+}
+
+#container {
+    max-width:310px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .message {
-    border: solid 4px red;
+    border: solid 2px red;
     padding: 4px 20px;
     background-color: mistyrose;
     color: red;
@@ -12,6 +48,7 @@
 
 .pref {
     width: 80px;
+    font-size: 16px;
 }
 
 .element_name {
