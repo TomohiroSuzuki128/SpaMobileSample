@@ -141,6 +141,7 @@ namespace JZipSearch.iOS.Views
                 KeyboardType = UIKeyboardType.Twitter,
                 Font = UIFont.SystemFontOfSize(fontSize),
                 AccessibilityIdentifier = "prefectureText",
+                Placeholder = "都道府県を選択",
             };
 
             prefectureText.Layer.BorderWidth = 1;
@@ -217,7 +218,8 @@ namespace JZipSearch.iOS.Views
                 TranslatesAutoresizingMaskIntoConstraints = false,
                 KeyboardType = UIKeyboardType.Twitter,
                 Font = UIFont.SystemFontOfSize(fontSize),
-                AccessibilityIdentifier = "prefectureText",
+                AccessibilityIdentifier = "cityText",
+                Placeholder = "市区町村を入力",
             };
 
             cityText.Layer.BorderWidth = 1;
@@ -262,7 +264,8 @@ namespace JZipSearch.iOS.Views
                 TranslatesAutoresizingMaskIntoConstraints = false,
                 KeyboardType = UIKeyboardType.Twitter,
                 Font = UIFont.SystemFontOfSize(fontSize),
-                AccessibilityIdentifier = "prefectureText",
+                AccessibilityIdentifier = "addressText",
+                Placeholder = "番地を入力",
             };
 
             addressText.Layer.BorderWidth = 1;
