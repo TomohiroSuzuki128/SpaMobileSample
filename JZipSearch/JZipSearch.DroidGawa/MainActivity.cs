@@ -18,9 +18,9 @@ namespace JZipSearch.DroidGawa
             var webView = FindViewById<Android.Webkit.WebView>(Resource.Id.webView);
             webView.SetWebViewClient(new Android.Webkit.WebViewClient());
             webView.Settings.JavaScriptEnabled = true;
-            webView.LoadUrl("http://10.0.2.2:5000/index.html");
+            webView.LoadUrl("https://decode19sap.azurewebsites.net/index.html");
         }
-
+        /*
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
@@ -49,7 +49,7 @@ namespace JZipSearch.DroidGawa
 
             return base.OnOptionsItemSelected(item);
         }
-
+        */
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
