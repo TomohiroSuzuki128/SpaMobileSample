@@ -2,10 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleName</key>
-	<string>JZipSearch</string>
+	<key>CFBundleDisplayName</key>
+	<string>ガワアプリ</string>
 	<key>CFBundleIdentifier</key>
-	<string>decode2019.jzipcodesample.JZipSearch</string>
+	<string>decode2019.jzipcodesample.JZipGawa</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -30,6 +30,8 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -40,7 +42,7 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
-	<key>CFBundleDisplayName</key>
-	<string>ネイティブ</string>
+	<key>CFBundleName</key>
+	<string>JZipGawa</string>
 </dict>
 </plist>
