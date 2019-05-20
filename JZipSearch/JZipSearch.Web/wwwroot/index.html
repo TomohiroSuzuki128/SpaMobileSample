@@ -10,7 +10,7 @@
     </head>
     <body style="margin-top:0px;">
         <div id="app">
-            <div style="float:left;">
+            <div id="container">
                 <templete v-if="initialized">
                     <transition name="fade">
                         <div class="message" v-if="showMessage">{{ message }}</div>
