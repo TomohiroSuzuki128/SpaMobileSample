@@ -1,6 +1,7 @@
 ﻿body {
     margin: 0px;
     padding: 10px;
+    font-family: sans-serif;
 }
 
 div {
@@ -18,7 +19,7 @@ select {
     font-size: 16px;
 }
 
-input[type="text"] {
+input[type="text"], input[type="tel"] {
     padding: 5px 8px;
     border-radius: 6px;
     border-top: 1px solid #aaa;
@@ -34,7 +35,7 @@ input[type="text"] {
 }
 
 #container {
-    max-width:310px;
+    max-width:320px;
     margin-left: auto;
     margin-right: auto;
 }
