@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="app_name">住所から郵便番号を検索</string>
+    <string name="action_settings">Settings</string>
+    <string name="from_address">住所から郵便番号を検索</string>
+    <string name="hint_zipcode">郵便番号を入力</string>
+    <string name="hint_address1">市区町村を入力</string>
+    <string name="hint_address2">番地を入力</string>
+    <string name="zipcode">郵便番号</string>
+    <string name="prefecture">都道府県</string>
+    <string name="address1">市区町村</string>
+    <string name="address2">番地</string>
+</resources>

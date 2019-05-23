@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>SPA</title>
+        <link rel="icon" href="/favicon.png" type="image/x-icon">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <link rel="stylesheet" type="text/css" href="style_bug01.css">
+    </head>
+    <body style="margin-top:0px;">
+        <div id="app">
+            <div id="container">
+                <templete v-if="initialized">
+                    <transition name="fade">
+                        <div class="message" v-if="showMessage">{{ message }}</div>
+                    </transition>
+                </templete>
+                <div>
+                    <div class="element_name">郵便番号</div>
+                    <input type="tel" v-model="zipCode" placeholder="郵便番号を入力" />
+                </div>
+                <div style="text-align: center;">
+                    <button type="button" v-on:click="handleZipCodeToAddressClick">郵便番号から住所を検索</button>
+                </div>
+                <div>
+                    <div class="element_name">都道府県</div>
+                    <select class="pref" v-model="prefecture">
+                        <option v-if="initialized"> </option>
+                        <option v-for="item in prefectureList" v-bind:value="item.code">{{ item.name }}</option>
+                    </select>
+                </div>
+                <div>
+                    <div class="element_name">市区町村</div>
+                    <input type="text" v-model="address1" placeholder="市区町村を入力" />
+                </div>
+                <div>
+                    <div class="element_name">番地</div>
+                    <input type="text" v-model="address2" placeholder="番地を入力" />
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="scripts/index.js"></script>
+    </body>
+</html>

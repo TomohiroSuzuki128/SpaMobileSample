@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using JZipSearch.iOS.Views;
 using UIKit;
 
 namespace JZipSearch.iOS
@@ -18,8 +19,11 @@ namespace JZipSearch.iOS
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            // Override point for customization after application launch.
-            // If not required for your application you can safely delete this method
+            Window = new UIWindow(UIScreen.MainScreen.Bounds)
+            {
+                RootViewController = new MainViewController(),
+            };
+            Window.MakeKeyAndVisible();
 
             return true;
         }
