@@ -22,7 +22,6 @@ namespace JZipSearch.iOS.Views
         UILabel zipcodeLabel;
         UITextField zipcodeText;
         UIButton searchFromZipcodeButton;
-        UIButton searchFromAddressButton;
         UILabel prefectureLabel;
         UITextField prefectureText;
         UIPickerView prefecturePicker;
@@ -68,12 +67,26 @@ namespace JZipSearch.iOS.Views
                 Frame = new CGRect(0, 0, 375, 35),
                 ContentMode = UIViewContentMode.ScaleToFill,
                 TranslatesAutoresizingMaskIntoConstraints = false,
-                KeyboardType = UIKeyboardType.Twitter,
+                KeyboardType = UIKeyboardType.NumberPad,
                 Font = UIFont.SystemFontOfSize(fontSize),
                 AccessibilityIdentifier = "zipcodeText",
                 Placeholder = "郵便番号を入力",
             };
 
+            var zipcodeToolBar = new UIToolbar
+            {
+                BarStyle = UIBarStyle.Default,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+            };
+            zipcodeToolBar.HeightAnchor.ConstraintEqualTo(40).Active = true;
+            zipcodeToolBar.WidthAnchor.ConstraintEqualTo(View.Frame.Width).Active = true;
+
+            var zipcodeSpaceItem = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace);
+            var zipcodeDoneItem = new UIBarButtonItem(UIBarButtonSystemItem.Done, (s, e) => zipcodeText.EndEditing(true));
+
+            zipcodeToolBar.SetItems(new UIBarButtonItem[] { zipcodeSpaceItem, zipcodeDoneItem }, false);
+
+            zipcodeText.InputAccessoryView = zipcodeToolBar;
             zipcodeText.Layer.BorderWidth = 1;
             zipcodeText.Layer.BorderColor = UIColor.LightGray.CGColor;
 
@@ -159,25 +172,24 @@ namespace JZipSearch.iOS.Views
                 0, false);
 
             // 決定バー
-            var toolBar = new UIToolbar
+            var prefectureToolBar = new UIToolbar
             {
                 BarStyle = UIBarStyle.Default,
                 TranslatesAutoresizingMaskIntoConstraints = false,
             };
-            toolBar.HeightAnchor.ConstraintEqualTo(40).Active = true;
-            toolBar.WidthAnchor.ConstraintEqualTo(View.Frame.Width).Active = true;
+            prefectureToolBar.HeightAnchor.ConstraintEqualTo(40).Active = true;
+            prefectureToolBar.WidthAnchor.ConstraintEqualTo(View.Frame.Width).Active = true;
 
-            var spacelItem = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, this, null);
-            var doneItem = new UIBarButtonItem(UIBarButtonSystemItem.Done,
+            var prefectureSpaceItem = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, this, null);
+            var prefectureDoneItem = new UIBarButtonItem(UIBarButtonSystemItem.Done,
                 (s, e) =>
                 {
                     prefectureText.EndEditing(true);
                     prefectureText.Text = Prefectures.All().Skip((int)prefecturePicker.SelectedRowInComponent(0)).FirstOrDefault().Name;
                 });
-            toolBar.SetItems(new UIBarButtonItem[] { spacelItem, doneItem }, true);
-
+            prefectureToolBar.SetItems(new UIBarButtonItem[] { prefectureSpaceItem, prefectureDoneItem }, true);
             prefectureText.InputView = prefecturePicker;
-            prefectureText.InputAccessoryView = toolBar;
+            prefectureText.InputAccessoryView = prefectureToolBar;
 
             View.AddSubview(prefectureText);
 
@@ -221,6 +233,21 @@ namespace JZipSearch.iOS.Views
                 AccessibilityIdentifier = "cityText",
                 Placeholder = "市区町村を入力",
             };
+
+            var cityToolBar = new UIToolbar
+            {
+                BarStyle = UIBarStyle.Default,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+            };
+            cityToolBar.HeightAnchor.ConstraintEqualTo(40).Active = true;
+            cityToolBar.WidthAnchor.ConstraintEqualTo(View.Frame.Width).Active = true;
+
+            var citySpaceItem = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace);
+            var cityDoneItem = new UIBarButtonItem(UIBarButtonSystemItem.Done, (s, e) => cityText.EndEditing(true));
+
+            cityToolBar.SetItems(new UIBarButtonItem[] { citySpaceItem, cityDoneItem }, false);
+
+            cityText.InputAccessoryView = cityToolBar;
 
             cityText.Layer.BorderWidth = 1;
             cityText.Layer.BorderColor = UIColor.LightGray.CGColor;
@@ -268,6 +295,21 @@ namespace JZipSearch.iOS.Views
                 Placeholder = "番地を入力",
             };
 
+            var addressToolBar = new UIToolbar
+            {
+                BarStyle = UIBarStyle.Default,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+            };
+            addressToolBar.HeightAnchor.ConstraintEqualTo(40).Active = true;
+            addressToolBar.WidthAnchor.ConstraintEqualTo(View.Frame.Width).Active = true;
+
+            var addressSpaceItem = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace);
+            var addressDoneItem = new UIBarButtonItem(UIBarButtonSystemItem.Done, (s, e) => addressText.EndEditing(true));
+
+            addressToolBar.SetItems(new UIBarButtonItem[] { addressSpaceItem, addressDoneItem }, false);
+
+            addressText.InputAccessoryView = addressToolBar;
+
             addressText.Layer.BorderWidth = 1;
             addressText.Layer.BorderColor = UIColor.LightGray.CGColor;
 
@@ -279,10 +321,7 @@ namespace JZipSearch.iOS.Views
             addressText.LeftAnchor.ConstraintEqualTo(addressLabel.RightAnchor, addressColumnSpace).Active = true;
             addressText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 
-
         }
-
-
 
     }
 }

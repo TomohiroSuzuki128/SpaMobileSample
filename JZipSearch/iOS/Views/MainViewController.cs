@@ -45,6 +45,8 @@ namespace JZipSearch.iOS.Views
                 return;
             }
 
+            View.EndEditing(true);
+
             prefectureText.Text = addressList.FirstOrDefault().Prefecture;
             cityText.Text = addressList.FirstOrDefault().City;
             addressText.Text = addressList.FirstOrDefault().Machi;
