@@ -68,12 +68,26 @@ namespace JZipSearch.iOS.Views
                 Frame = new CGRect(0, 0, 375, 35),
                 ContentMode = UIViewContentMode.ScaleToFill,
                 TranslatesAutoresizingMaskIntoConstraints = false,
-                KeyboardType = UIKeyboardType.Twitter,
+                KeyboardType = UIKeyboardType.NumberPad,
                 Font = UIFont.SystemFontOfSize(fontSize),
                 AccessibilityIdentifier = "zipcodeText",
                 Placeholder = "郵便番号を入力",
             };
 
+            var zipcodeToolBar = new UIToolbar
+            {
+                BarStyle = UIBarStyle.Default,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+            };
+            zipcodeToolBar.HeightAnchor.ConstraintEqualTo(40).Active = true;
+            zipcodeToolBar.WidthAnchor.ConstraintEqualTo(View.Frame.Width).Active = true;
+
+            var zipcodeSpaceItem = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace);
+            var zipcodeDoneItem = new UIBarButtonItem(UIBarButtonSystemItem.Done, (s, e) => zipcodeText.EndEditing(true));
+
+            zipcodeToolBar.SetItems(new UIBarButtonItem[] { zipcodeSpaceItem, zipcodeDoneItem }, false);
+
+            zipcodeText.InputAccessoryView = zipcodeToolBar;
             zipcodeText.Layer.BorderWidth = 1;
             zipcodeText.Layer.BorderColor = UIColor.LightGray.CGColor;
 
@@ -159,25 +173,24 @@ namespace JZipSearch.iOS.Views
                 0, false);
 
             // 決定バー
-            var toolBar = new UIToolbar
+            var prefectureToolBar = new UIToolbar
             {
                 BarStyle = UIBarStyle.Default,
                 TranslatesAutoresizingMaskIntoConstraints = false,
             };
-            toolBar.HeightAnchor.ConstraintEqualTo(40).Active = true;
-            toolBar.WidthAnchor.ConstraintEqualTo(View.Frame.Width).Active = true;
+            prefectureToolBar.HeightAnchor.ConstraintEqualTo(40).Active = true;
+            prefectureToolBar.WidthAnchor.ConstraintEqualTo(View.Frame.Width).Active = true;
 
-            var spacelItem = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, this, null);
-            var doneItem = new UIBarButtonItem(UIBarButtonSystemItem.Done,
+            var prefectureSpaceItem = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, this, null);
+            var prefectureDoneItem = new UIBarButtonItem(UIBarButtonSystemItem.Done,
                 (s, e) =>
                 {
                     prefectureText.EndEditing(true);
                     prefectureText.Text = Prefectures.All().Skip((int)prefecturePicker.SelectedRowInComponent(0)).FirstOrDefault().Name;
                 });
-            toolBar.SetItems(new UIBarButtonItem[] { spacelItem, doneItem }, true);
-
+            prefectureToolBar.SetItems(new UIBarButtonItem[] { prefectureSpaceItem, prefectureDoneItem }, true);
             prefectureText.InputView = prefecturePicker;
-            prefectureText.InputAccessoryView = toolBar;
+            prefectureText.InputAccessoryView = prefectureToolBar;
 
             View.AddSubview(prefectureText);
 

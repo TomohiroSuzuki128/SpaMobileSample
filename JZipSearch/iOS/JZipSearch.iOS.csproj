@@ -164,6 +164,7 @@
     <Compile Include="Views\MainViewController.Designer.cs" />
     <Compile Include="Views\PrefecturePickerViewDataSource.cs" />
     <Compile Include="Views\PrefecturePickerViewDelegate.cs" />
+    <Compile Include="Views\UIPaddingTextFieldDelegate.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

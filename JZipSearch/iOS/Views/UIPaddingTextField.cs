@@ -3,7 +3,7 @@ using CoreGraphics;
 using Foundation;
 using UIKit;
 
-namespace JZipSearch.iOS
+namespace JZipSearch.iOS.Views
 {
     public class UIPaddingTextField : UITextField
     {
@@ -43,6 +43,7 @@ namespace JZipSearch.iOS
             Layer.BorderColor = UIColor.LightGray.CGColor;
             Layer.BorderWidth = 1;
             Layer.MasksToBounds = true;
+            Delegate = new UIPaddingTextFieldDelegate();
         }
 
     }
