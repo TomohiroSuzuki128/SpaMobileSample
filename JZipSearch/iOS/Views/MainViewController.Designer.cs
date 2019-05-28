@@ -22,7 +22,6 @@ namespace JZipSearch.iOS.Views
         UILabel zipcodeLabel;
         UITextField zipcodeText;
         UIButton searchFromZipcodeButton;
-        UIButton searchFromAddressButton;
         UILabel prefectureLabel;
         UITextField prefectureText;
         UIPickerView prefecturePicker;
@@ -235,6 +234,21 @@ namespace JZipSearch.iOS.Views
                 Placeholder = "市区町村を入力",
             };
 
+            var cityToolBar = new UIToolbar
+            {
+                BarStyle = UIBarStyle.Default,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+            };
+            cityToolBar.HeightAnchor.ConstraintEqualTo(40).Active = true;
+            cityToolBar.WidthAnchor.ConstraintEqualTo(View.Frame.Width).Active = true;
+
+            var citySpaceItem = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace);
+            var cityDoneItem = new UIBarButtonItem(UIBarButtonSystemItem.Done, (s, e) => cityText.EndEditing(true));
+
+            cityToolBar.SetItems(new UIBarButtonItem[] { citySpaceItem, cityDoneItem }, false);
+
+            cityText.InputAccessoryView = cityToolBar;
+
             cityText.Layer.BorderWidth = 1;
             cityText.Layer.BorderColor = UIColor.LightGray.CGColor;
 
@@ -281,6 +295,21 @@ namespace JZipSearch.iOS.Views
                 Placeholder = "番地を入力",
             };
 
+            var addressToolBar = new UIToolbar
+            {
+                BarStyle = UIBarStyle.Default,
+                TranslatesAutoresizingMaskIntoConstraints = false,
+            };
+            addressToolBar.HeightAnchor.ConstraintEqualTo(40).Active = true;
+            addressToolBar.WidthAnchor.ConstraintEqualTo(View.Frame.Width).Active = true;
+
+            var addressSpaceItem = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace);
+            var addressDoneItem = new UIBarButtonItem(UIBarButtonSystemItem.Done, (s, e) => addressText.EndEditing(true));
+
+            addressToolBar.SetItems(new UIBarButtonItem[] { addressSpaceItem, addressDoneItem }, false);
+
+            addressText.InputAccessoryView = addressToolBar;
+
             addressText.Layer.BorderWidth = 1;
             addressText.Layer.BorderColor = UIColor.LightGray.CGColor;
 
@@ -292,10 +321,7 @@ namespace JZipSearch.iOS.Views
             addressText.LeftAnchor.ConstraintEqualTo(addressLabel.RightAnchor, addressColumnSpace).Active = true;
             addressText.RightAnchor.ConstraintEqualTo(View.LayoutMarginsGuide.RightAnchor).Active = true;
 
-
         }
-
-
 
     }
 }
