@@ -44,5 +44,7 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>CFBundleName</key>
 	<string>JZipGawa</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>ja</string>
 </dict>
 </plist>
